@@ -2,12 +2,11 @@ import { useAuth } from "./AuthContext";
 
 /** Users can enter their name to receive a token from the API. */
 export default function Entrance() {
-    const { signup } = useAuth();
+    const { signupAsync, token } = useAuth();
 
-    function handleInputName(formData) {
-        console.log(`name is: ${formData.get("name")}`);
+    async function handleInputNameAsync(formData) {
         const name = formData.get("name");
-        signup(name);
+        await signupAsync(name);
     }
 
     return (
@@ -24,7 +23,7 @@ export default function Entrance() {
                 a deep, rumbling voice, it asks, "Who approaches? Speak your
                 name."
             </p>
-            <form action={handleInputName}>
+            <form action={handleInputNameAsync}>
                 <label>
                     Name
                     <input name="name" />
