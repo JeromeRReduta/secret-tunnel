@@ -1,16 +1,18 @@
 import { createContext, useContext, useState } from "react";
 import TrySignup from "./use-cases/TrySignup";
+import constants from "./constants";
 
-const API = "https://fsa-jwt-practice.herokuapp.com";
-const ENDPOINT = "signup";
 const bestPassword = "1234";
 
 const AuthContext = createContext();
 
-const trySignup = new TrySignup({ apiBase: API, endpoint: ENDPOINT });
+const trySignup = new TrySignup({
+    apiBase: constants.api.base,
+    endpoint: constants.api.signup,
+});
 export function AuthProvider({ children }) {
     const [token, setToken] = useState();
-    const [location, setLocation] = useState("GATE");
+    const [location, setLocation] = useState(constants.locations.entrance);
 
     const signupAsync = async (username) => {
         const responseToken = await trySignup.runAsync({
@@ -19,7 +21,7 @@ export function AuthProvider({ children }) {
         });
         console.log("response token:", responseToken);
         setToken(responseToken);
-        setLocation("TABLET");
+        setLocation(constants.locations.tablet);
     };
 
     // TODO: authenticate
