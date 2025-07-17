@@ -4,14 +4,11 @@ import constants from "./constants";
 import TryAuthenticate from "./use-cases/TryAuthenticate";
 
 const bestPassword = "1234";
-
 const AuthContext = createContext();
-
 const trySignup = new TrySignup({
     apiBase: constants.api.base,
     endpoint: constants.api.signup,
 });
-
 const tryAuthenticate = new TryAuthenticate({
     apiBase: constants.api.base,
     endpoint: constants.api.authenticate,
@@ -21,7 +18,6 @@ export function AuthProvider({ children }) {
     const [token, setToken] = useState();
     const [location, setLocation] = useState(constants.locations.entrance);
     const [d20Roll, setD20Roll] = useState(0);
-
     const signupAsync = async (username) => {
         const responseToken = await trySignup.runAsync({
             username: username,
@@ -44,8 +40,6 @@ export function AuthProvider({ children }) {
         }
         setLocation(constants.locations.dungeon);
     };
-
-    // TODO: authenticate
 
     const value = { location, signupAsync, token, authenticateAsync, d20Roll };
     return (

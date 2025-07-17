@@ -1,6 +1,5 @@
 import { useAuth } from "./AuthContext";
 
-/** Users can only this component if they are authorized by the API. */
 export default function Dungeon() {
     const { d20Roll } = useAuth();
     return (
