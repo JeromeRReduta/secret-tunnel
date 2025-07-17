@@ -2,13 +2,13 @@ import { useAuth } from "./AuthContext";
 
 /** Button that attempts to use the token in context when clicked */
 export default function Tablet() {
+    async function handleButtonClick(formData) {
+        await authenticateAsync();
+    }
     // TODO: call authenticate when form is submitted
 
-    const { token, location } = useAuth();
+    const { authenticateAsync } = useAuth();
 
-    console.log(`{
-    token: ${token}
-    location: ${location}}`);
     return (
         <section>
             <p>
@@ -25,7 +25,7 @@ export default function Tablet() {
                 It holds out a rectangular stone tablet carved with an intricate
                 design.
             </p>
-            <form>
+            <form action={handleButtonClick}>
                 <button>Place your palm upon the tablet.</button>
             </form>
         </section>
